@@ -1,3 +1,4 @@
+import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import "@fontsource-variable/mulish";
 import { ThemeProvider, createTheme } from "@mui/material";
 import React from "react";
@@ -33,10 +34,16 @@ const theme = createTheme({
   },
 });
 
+const client = new ApolloClient({
+  uri: "http://localhost:4000",
+  cache: new InMemoryCache(),
+});
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
-      <App />
+      <ApolloProvider client={client}>
+        <App />
+      </ApolloProvider>
     </ThemeProvider>
   </React.StrictMode>
 );
