@@ -1,13 +1,7 @@
-import { useState } from 'react'
+import { Typography } from "@mui/material";
 
 function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-  )
+  return <Typography variant="h1">Hello, Ello!</Typography>;
 }
 
-export default App
+export default App;
