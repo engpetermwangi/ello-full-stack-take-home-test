@@ -1,7 +1,36 @@
-import { Typography } from "@mui/material";
+import { createContext, useState } from "react";
+import { BookSearch } from "./components/BookSearch";
+import { Container } from "./components/Container";
+import { Book } from "./types/Book";
+import { BooksContextInterface } from "./types/BooksContextInterface";
 
-function App() {
-  return <Typography variant="h1">Hello, Ello!</Typography>;
-}
+export const BooksContext = createContext<BooksContextInterface>({
+  selectedBooks: [],
+  addBook: () => {},
+  removeBook: () => {},
+});
+
+const App = () => {
+  const [selectedBooks, setSelectedBooks] = useState<Book[]>([]);
+
+  const addBook = (book: Book) => setSelectedBooks([...selectedBooks, book]);
+  const removeBook = (book: Book) =>
+    setSelectedBooks(selectedBooks.filter((b) => b !== book));
+
+  return (
+    <BooksContext.Provider value={{ selectedBooks, addBook, removeBook }}>
+      <Container>
+        <BookSearch />
+        <ul>
+          {selectedBooks.map((book) => (
+            <li key={book.title + book.author}>
+              {book.title} by {book.author}
+            </li>
+          ))}
+        </ul>
+      </Container>
+    </BooksContext.Provider>
+  );
+};
 
 export default App;
