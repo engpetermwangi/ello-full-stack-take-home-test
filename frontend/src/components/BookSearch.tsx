@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 import { useBooks } from "../hooks/Books";
 import { GETBOOKS } from "../queries/GetBooks";
 import { Book } from "../types/Book";
-import { Error } from "./Error";
+import { Alert } from "./Alert";
 
 export const BookSearch = () => {
   const { addBook } = useBooks();
@@ -34,7 +34,7 @@ export const BookSearch = () => {
     }
   };
 
-  if (error) return <Error errorMessage={error.message} />;
+  if (error) return <Alert message={error.message} severity="error" />;
 
   if (loading) return <Skeleton height={120} />;
 
