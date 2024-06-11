@@ -3,6 +3,7 @@ import { BookSearch } from "./components/BookSearch";
 import { Container } from "./components/Container";
 import { Book } from "./types/Book";
 import { BooksContextInterface } from "./types/BooksContextInterface";
+import { BookList } from "./components/BookList";
 
 export const BooksContext = createContext<BooksContextInterface>({
   selectedBooks: [],
@@ -21,13 +22,7 @@ const App = () => {
     <BooksContext.Provider value={{ selectedBooks, addBook, removeBook }}>
       <Container>
         <BookSearch />
-        <ul>
-          {selectedBooks.map((book) => (
-            <li key={book.title + book.author}>
-              {book.title} by {book.author}
-            </li>
-          ))}
-        </ul>
+        <BookList />
       </Container>
     </BooksContext.Provider>
   );
